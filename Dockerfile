@@ -15,7 +15,6 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8 \
     && ln -s /usr/share/zoneinfo/Japan /etc/localtime
 
 # CIテスト用にsystemdを有効にする
-
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     systemd-tmpfiles-setup.service ] || rm -f $i; done); \
     rm -f /lib/systemd/system/multi-user.target.wants/*;\
