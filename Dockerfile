@@ -9,7 +9,7 @@ ENV container docker \
     LANGUAGE=ja_JP:ja \
     LC_ALL=ja_JP.UTF-8
 
-RUN yum -y update && yum install -y epel-release && yum -y groupinstall "Development Tools"
+RUN yum -y update && yum install -y epel-release && yum -y groupinstall "Development Tools" && yum clean all
 RUN yum install -y ansible systemd libselinux-python selinux-policy && yum clean all
 RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8 \
     && unlink /etc/localtime \
