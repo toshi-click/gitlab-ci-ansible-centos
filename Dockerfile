@@ -28,5 +28,6 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
 VOLUME [ "/sys/fs/cgroup" ]
 
 ADD ansible.cfg /etc/ansible/ansible.cfg
+ADD fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf
 
 CMD ["/usr/sbin/init"]
