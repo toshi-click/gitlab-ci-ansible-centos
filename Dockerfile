@@ -27,7 +27,9 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME [ "/sys/fs/cgroup" ]
 
+# CIサーバーからsshの警告が出ないように設定を追加する
 ADD ansible.cfg /etc/ansible/ansible.cfg
+# CIサーバーが国内なのでJP限定にする
 ADD fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf
 
 CMD ["/usr/sbin/init"]
