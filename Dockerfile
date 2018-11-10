@@ -47,3 +47,4 @@ ADD ansible.cfg /etc/ansible/ansible.cfg
 ADD fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf
 
 CMD ["/usr/sbin/init"]
+
