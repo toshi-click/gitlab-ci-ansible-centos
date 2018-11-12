@@ -60,4 +60,7 @@ ENV GOROOT=/usr/lib/golang \
 RUN yum install -y golang && \
     yum -q clean all
 
+# filelint入れる
+RUN go get -u github.com/synchro-food/filelint
+
 CMD ["/usr/sbin/init"]
