@@ -53,4 +53,11 @@ RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
     pip3.6 install awscli && \
     yum -q clean all
 
+# go使いたいので入れる
+ENV GOROOT=/usr/lib/golang \
+    GOPATH=/usr/local \
+    PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+RUN yum install -y golang && \
+    yum -q clean all
+
 CMD ["/usr/sbin/init"]
