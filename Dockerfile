@@ -46,5 +46,11 @@ ADD ansible.cfg /etc/ansible/ansible.cfg
 # CIサーバーが国内なのでJP限定にする
 ADD fastestmirror.conf /etc/yum/pluginconf.d/fastestmirror.conf
 
-CMD ["/usr/sbin/init"]
+# AWS CLI使うことが多いので入れる
+RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum install -y python36u python36u-libs python36u-devel python36u-pip && \
+    curl -kL https://bootstrap.pypa.io/get-pip.py | python3.6 && \
+    pip3.6 install awscli && \
+    yum -q clean all
 
+CMD ["/usr/sbin/init"]
