@@ -63,4 +63,26 @@ RUN yum install -y golang && \
 # filelint入れる
 RUN go get -u github.com/synchro-food/filelint
 
+# ruby入れる
+RUN yum -y install make tar git wget gcc-c++ openssl-devel readline-devel gdbm-devel libffi-devel zlib-devel curl-devel procps autoconf sudo && yum -q clean all \
+  && git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv \
+  && mkdir /usr/local/rbenv/shims /usr/local/rbenv/versions /usr/local/rbenv/plugins \
+  && groupadd rbenv \
+  && chgrp -R rbenv /usr/local/rbenv \
+  && chmod -R g+rwxXs /usr/local/rbenv \
+  && git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build \
+  && chgrp -R rbenv /usr/local/rbenv/plugins/ruby-build \
+  && chmod -R g+rwxs /usr/local/rbenv/plugins/ruby-build \
+  && /usr/local/rbenv/plugins/ruby-build/install.sh \
+  && git clone https://github.com/sstephenson/rbenv-default-gems.git /usr/local/rbenv/plugins/rbenv-default-gems \
+  && chgrp -R rbenv /usr/local/rbenv/plugins/rbenv-default-gems \
+  && chmod -R g+rwxs /usr/local/rbenv/plugins/rbenv-default-gems \
+  && echo 'export RBENV_ROOT="/usr/local/rbenv"' >> /etc/profile.d/rbenv.sh \
+  && echo 'export PATH="/usr/local/rbenv/bin:$PATH"' >> /etc/profile.d/rbenv.sh \
+  && echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh \
+  && echo '%rbenv ALL=(ALL) ALL' >> /etc/sudoers \
+  && su -l root -c '/usr/local/rbenv/bin/rbenv install 2.6.1 -v' \
+  && su -l root -c '/usr/local/rbenv/bin/rbenv rehash' \
+  && su -l root -c '/usr/local/rbenv/bin/rbenv global 2.6.1'
+
 CMD ["/usr/sbin/init"]
