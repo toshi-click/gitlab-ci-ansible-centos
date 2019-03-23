@@ -85,4 +85,6 @@ RUN yum -y install make tar git wget gcc-c++ openssl-devel readline-devel gdbm-d
   && su -l root -c '/usr/local/rbenv/bin/rbenv rehash' \
   && su -l root -c '/usr/local/rbenv/bin/rbenv global 2.6.1'
 
+RUN pip install ansible-lint
+
 CMD ["/usr/sbin/init"]
