@@ -87,7 +87,7 @@ RUN yum -y install make tar git wget gcc-c++ openssl-devel readline-devel gdbm-d
 
 RUN pip install ansible-lint
 
-RUN yum -y install https://centos7.iuscommunity.org/ius-release.rpm \
+RUN curl -s https://setup.ius.io/ | bash \
     && yum -y remove git \
     && yum -y install git2u \
     && yum -q clean all
